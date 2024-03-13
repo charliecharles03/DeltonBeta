@@ -1,4 +1,4 @@
-use actix_web::{get, web, App, HttpResponse, HttpServer, Responder, Result};
+use actix_web::{get, web, App, HttpResponse, HttpServer, Responder, Result, post};
 
 
 #[get("/health_check")]
@@ -9,7 +9,7 @@ pub async fn health_check() -> impl Responder {
 
 
 #[get("/brag")]
-pub async fn get_Brag() -> impl Responder {
+pub async fn get_brag() -> impl Responder {
     let response = Brag {
         title: "I am a title".to_string(),
         description: "I am a description".to_string(),
@@ -19,6 +19,14 @@ pub async fn get_Brag() -> impl Responder {
     }; 
     HttpResponse::Ok().json(response.get_all_brags())
 }
+
+#[post("/brag")]
+pub async fn post_brag() -> impl Responder {
+    let response = "I am a post request".to_string();
+    HttpResponse::Ok().json(response)
+}
+
+
 
 pub struct Brag {
     pub title: String,
